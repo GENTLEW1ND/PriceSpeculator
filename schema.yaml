@@ -1,0 +1,19 @@
+COLUMNS: 
+    Company Name: object
+    Model Name: object
+    Mobile Weight: object
+    RAM: object
+    Front Camera: object
+    Back Camera: object
+    Processor: object
+    Battery Capacity: object
+    Screen Size: object
+    Launched Price (Pakistan): object
+    Launched Price (India): object
+    Launched Price (China): object
+    Launched Price (USA): object
+    Launched Price (Dubai): object
+    Launched Year: int64
+  
+TARGET_COLUMN:
+    name: Launched Price (India)
