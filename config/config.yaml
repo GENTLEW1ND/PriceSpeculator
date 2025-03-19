@@ -13,3 +13,7 @@ data_validation:
     root_dir: artifacts/data_validation
     unzip_data_dir: artifacts/data_ingestion/Mobiles Dataset (2025).csv
     STATUS_FILE: artifacts/data_validation/status.txt
+
+data_transformation:
+    root_dir: artifacts/data_transformation
+    unzip_data_dir: artifacts/data_ingestion/Mobiles Dataset (2025).csv
