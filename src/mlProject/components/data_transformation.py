@@ -85,36 +85,17 @@ class DataTransformation:
         # Split the data into training and testing sets
         train, test = train_test_split(data, test_size=0.2, random_state=42)
 
-        # Separate features and target column
-        target_column = 'Launched Price (India)'  # Replace with your actual target column name
-        X_train = train.drop(columns=[target_column])
-        y_train = train[target_column]
-        X_test = test.drop(columns=[target_column])
-        y_test = test[target_column]
-
-        # Standardize the features (exclude the target column)
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
-
-        # Convert back to DataFrame for saving
-        X_train_scaled = pd.DataFrame(X_train_scaled, columns=X_train.columns)
-        X_test_scaled = pd.DataFrame(X_test_scaled, columns=X_test.columns)
-
-        # Add the target column back to the scaled DataFrames
-        train_scaled = pd.concat([X_train_scaled, y_train.reset_index(drop=True)], axis=1)
-        test_scaled = pd.concat([X_test_scaled, y_test.reset_index(drop=True)], axis=1)
-
+        
         # Save the train and test sets to CSV files
-        train_scaled.to_csv(os.path.join(self.config.root_dir, "train.csv"), index=False)
-        test_scaled.to_csv(os.path.join(self.config.root_dir, "test.csv"), index=False)
+        train.to_csv(os.path.join(self.config.root_dir, "train.csv"), index=False)
+        test.to_csv(os.path.join(self.config.root_dir, "test.csv"), index=False)
 
-        logger.info("Split and standardized data into training and test sets")
-        logger.info(f"Training set shape: {train_scaled.shape}")
-        logger.info(f"Test set shape: {test_scaled.shape}")
+    
+        logger.info(f"Training set shape: {train.shape}")
+        logger.info(f"Test set shape: {test.shape}")
 
-        print(train_scaled.shape)
-        print(test_scaled.shape)
+        print(train.shape)
+        print(test.shape)
             
             
             
