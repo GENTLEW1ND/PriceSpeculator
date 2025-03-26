@@ -23,6 +23,8 @@ class ModelTrainer:
         train_scaled = scaler.fit_transform(train_x)
         test_scaled = scaler.transform(test_x)
         
+        joblib.dump(scaler, os.path.join(self.config.root_dir, "scaler.joblib"))
+        
         lr = RandomForestRegressor()
         lr.fit(train_scaled,train_y)
         
