@@ -5,6 +5,8 @@ import re
 import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import StandardScaler
+import joblib
+
 
 class DataTransformation:
     def __init__(self, config):
@@ -71,12 +73,19 @@ class DataTransformation:
         processor_features = processor_vectorizer.fit_transform(data['Processor'].str.lower().str.replace('-', ' '))
         processor_df = pd.DataFrame(processor_features.toarray(), columns=processor_vectorizer.get_feature_names_out())
         combined_features = pd.concat([data.drop(columns=['Processor']), processor_df], axis=1)
+        
+         # Save the processor vectorizer
+        os.makedirs(self.config.root_dir, exist_ok=True)  # Ensure the directory exists
+        joblib.dump(processor_vectorizer, os.path.join(self.config.root_dir, "processor_vectorizer.joblib"))
 
         # Process Model Name column using TF-IDF
         model_vectorizer = TfidfVectorizer()
         model_features = model_vectorizer.fit_transform(combined_features['Model Name'].str.lower().replace('-', ' '))
         model_df = pd.DataFrame(model_features.toarray(), columns=model_vectorizer.get_feature_names_out())
         df = pd.concat([combined_features.drop(columns=['Model Name', 'Company Name']), model_df], axis=1)
+
+        joblib.dump(model_vectorizer, os.path.join(self.config.root_dir, "model_vectorizer.joblib"))
+        
 
         return df
     
