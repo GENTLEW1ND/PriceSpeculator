@@ -25,7 +25,7 @@ class ModelTrainer:
         
         joblib.dump(scaler, os.path.join(self.config.root_dir, "scaler.joblib"))
         
-        lr = RandomForestRegressor()
+        lr = RandomForestRegressor(n_estimators=self.config.n_estimators, oob_score=True, max_depth=30, min_samples_leaf=1, min_samples_split=2)
         lr.fit(train_scaled,train_y)
         
         joblib.dump(lr, os.path.join(self.config.root_dir, self.config.model_name))
