@@ -27,6 +27,10 @@ class ModelTrainerConfig:
     test_data_path: Path
     model_name: str
     target_column: str
+    n_estimators: float
+    max_depth: float
+    min_samples_leaf: float
+    min_samples_split: float
     
 @dataclass(frozen=True)
 class ModelEvaluationConfig:

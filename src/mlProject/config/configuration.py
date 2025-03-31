@@ -60,6 +60,7 @@ class ConfigurationManager:
         config = self.config.model_trainer
         #Here you can add params also incase you are doing hyperparameter tuining.
         schema = self.schema.TARGET_COLUMN
+        params = self.params.RandomForestRegressor
         
         create_directories([config.root_dir])
         
@@ -68,7 +69,11 @@ class ConfigurationManager:
             train_data_path= config.train_data_path,
             test_data_path = config.test_data_path,
             model_name= config.model_name,
-            target_column= schema.name 
+            target_column= schema.name,
+            n_estimators= params.n_estimators,
+            max_depth= params.max_depth,
+            min_samples_leaf= params.min_samples_leaf,
+            min_samples_split= params.min_samples_split
         )
         
         return model_trainer_config
