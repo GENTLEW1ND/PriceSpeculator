@@ -99,30 +99,7 @@ class PredictionPipeline:
         logging.info("Making predictions...")
         prediction = self.model.predict(data_scaled_array)
         logging.info("Prediction completed successfully.")
+        prediction.tolist()  # Convert NumPy array to a Python list
+        
+        return prediction[0]
 
-        return prediction.tolist()  # Convert NumPy array to a Python list
-
-if __name__ == "__main__":
-    # Create a sample DataFrame for testing
-    data = {
-        'Processor': ['A17 Bionic'],
-        'Model Name': ['iPhone 16 128GB'],
-        'Mobile Weight': [198],
-        'RAM': [8.0],
-        'Front Camera': [12],
-        'Back Camera': [48],
-        'Battery Capacity': [3500],
-        'Screen Size': [6.7],
-        'Launched Year': [2024]
-    }
-    test_df = pd.DataFrame(data)
-
-    # Initialize the PredictionPipeline
-    pipeline = PredictionPipeline()
-
-    # Make a prediction
-    try:
-        prediction = pipeline.predict(test_df)
-        print(f"Prediction: {prediction}")
-    except Exception as e:
-        logging.error(f"Error during prediction: {e}")
