@@ -9,4 +9,5 @@ joblib
 types-PyYAML
 Flask
 Flask-Cors
+gunicorn>=20.0.4
 -e .
